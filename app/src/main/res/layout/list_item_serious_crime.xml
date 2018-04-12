@@ -28,5 +28,6 @@
         android:id="@+id/contact_police_button"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_alignParentEnd="true"/>
+        android:layout_alignParentEnd="true"
+        android:text="Contact Police"/>
 </RelativeLayout>
