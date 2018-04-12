@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +40,7 @@ public class CrimeListFragment extends Fragment{
 
         private TextView mTitleTextView;
         private TextView mDateTextView;
+        private Button mContactPoliceBtn;
 
         private Crime mCrime;
 
@@ -49,6 +51,16 @@ public class CrimeListFragment extends Fragment{
             mTitleTextView = itemView.findViewById(R.id.crime_title);
             mDateTextView = itemView.findViewById(R.id.crime_date);
 
+            if (viewtype == R.layout.list_item_serious_crime) {
+                mContactPoliceBtn = itemView.findViewById(R.id.contact_police_button);
+                mContactPoliceBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(getActivity(), "Calling Police for "
+                                        + mCrime.getTitle(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
         }
 
         // bind a new Crime each time it should be displayed in CrimeHolder
