@@ -94,8 +94,9 @@ public class CrimeListFragment extends Fragment{
 
         @Override
         public int getItemViewType(int position) {
-            if (mCrimes.get(position))
-            return super.getItemViewType(position);
+            // return serious crime View for serious ones, otherwise return normal crime View
+            return mCrimes.get(position).isRequiresPolice() ? R.layout.list_item_serious_crime
+                    : R.layout.list_item_crime;
         }
     }
 
