@@ -13,6 +13,8 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 
+import java.util.UUID;
+
 /**
  * Created by Skyz on 3/13/2018.
  */
@@ -26,7 +28,9 @@ public class CrimeFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mCrime = new Crime();
+        UUID crimeId = (UUID) getActivity().getIntent()
+                .getSerializableExtra(CrimeActivity.EXTRA_CRIME_ID);
+        mCrime = CrimeLab.get(getActivity()).getCrime(crimeId);
     }
 
     @Nullable
@@ -55,6 +59,9 @@ public class CrimeFragment extends Fragment {
 
             }
         });
+        // display the Crime's info
+        mTitleField.setText(mCrime.getTitle());
+        mSolvedCheckBox.setChecked(mCrime.isSolved());
         // Set the date to the current date
         mDateButton.setText(mCrime.getDate().toString());
         mDateButton.setEnabled(false);
