@@ -86,7 +86,7 @@ public class CrimeListFragment extends Fragment{
         @Override
         public void onClick(View view) {
             // show the crime
-            Intent crimeIntent = new Intent(getActivity(), CrimeActivity.class);
+            Intent crimeIntent = CrimeActivity.newIntent(getActivity(), mCrime.getId());
             startActivity(crimeIntent);
         }
     }
