@@ -20,10 +20,22 @@ import java.util.UUID;
  */
 
 public class CrimeFragment extends Fragment {
+
+    private static final String ARG_CRIME_ID = "crime_id";
+
     private EditText mTitleField;
     private Button mDateButton;
     private CheckBox mSolvedCheckBox;
     private Crime mCrime;
+
+    public static CrimeFragment newInstance(UUID crimeId) {
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_CRIME_ID, crimeId);
+
+        CrimeFragment crimeFragment  = new CrimeFragment();
+        crimeFragment.setArguments(args);
+        return crimeFragment;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
