@@ -9,10 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Skyz on 3/17/2018.
@@ -40,9 +44,12 @@ public class CrimeListFragment extends Fragment{
 
         private TextView mTitleTextView;
         private TextView mDateTextView;
+        private ImageView mCrimeSolvedView;
         private Button mContactPoliceBtn;
 
         private Crime mCrime;
+
+        private String datePattern = "EE, MM dd, yyyy";
 
         public CrimeHolder(LayoutInflater inflater, ViewGroup parent, int viewtype) {
             super(inflater.inflate(viewtype, parent, false));
@@ -50,24 +57,29 @@ public class CrimeListFragment extends Fragment{
 
             mTitleTextView = itemView.findViewById(R.id.crime_title);
             mDateTextView = itemView.findViewById(R.id.crime_date);
-
-            if (viewtype == R.layout.list_item_serious_crime) {
-                mContactPoliceBtn = itemView.findViewById(R.id.contact_police_button);
-                mContactPoliceBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(getActivity(), "Calling Police for "
-                                        + mCrime.getTitle(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
+            mCrimeSolvedView = itemView.findViewById(R.id.crime_solved);
+//
+//            if (viewtype == R.layout.list_item_serious_crime) {
+//                mContactPoliceBtn = itemView.findViewById(R.id.contact_police_button);
+//                mContactPoliceBtn.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        Toast.makeText(getActivity(), "Calling Police for "
+//                                        + mCrime.getTitle(), Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//            }
         }
 
         // bind a new Crime each time it should be displayed in CrimeHolder
         public void bind(Crime crime) {
             mCrime = crime;
             mTitleTextView.setText(mCrime.getTitle());
-            mDateTextView.setText(mCrime.getDate().toString());
+
+            SimpleDateFormat format = new SimpleDateFormat(datePattern, Locale.US);
+            String dateString = format.format(mCrime.getDate());
+            mDateTextView.setText(dateString);
+            mCrimeSolvedView.setVisibility(mCrime.isSolved() ? View.VISIBLE : View.GONE);
         }
 
         @Override
@@ -107,8 +119,9 @@ public class CrimeListFragment extends Fragment{
         @Override
         public int getItemViewType(int position) {
             // return serious crime View for serious ones, otherwise return normal crime View
-            return mCrimes.get(position).isRequiresPolice() ? R.layout.list_item_serious_crime
-                    : R.layout.list_item_crime;
+//            return mCrimes.get(position).isRequiresPolice() ? R.layout.list_item_serious_crime
+//                    : R.layout.list_item_crime;
+            return R.layout.list_item_crime;
         }
     }
 
