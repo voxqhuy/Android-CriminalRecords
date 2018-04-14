@@ -77,7 +77,7 @@ public class CrimeFragment extends Fragment {
         mSolvedCheckBox.setChecked(mCrime.isSolved());
         // Set the date to the current date
         mDateButton.setText(mCrime.getDate().toString());
-        mDateButton.setEnabled(false);
+//        mDateButton.setEnabled(false);
         mDateButton.setOnClickListener((View view) -> {
             FragmentManager fm = getFragmentManager();
             DatePickerFragment dialog = new DatePickerFragment();
