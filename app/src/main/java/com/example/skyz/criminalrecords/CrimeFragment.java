@@ -80,7 +80,7 @@ public class CrimeFragment extends Fragment {
 //        mDateButton.setEnabled(false);
         mDateButton.setOnClickListener((View view) -> {
             FragmentManager fm = getFragmentManager();
-            DatePickerFragment dialog = new DatePickerFragment();
+            DatePickerFragment dialog = DatePickerFragment.newInstance(mCrime.getDate());
             dialog.show(fm, DIALOG_DATE);
         });
         // Crime solved check listener
