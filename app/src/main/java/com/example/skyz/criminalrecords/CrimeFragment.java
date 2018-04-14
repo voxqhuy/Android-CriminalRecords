@@ -16,7 +16,7 @@ import android.widget.EditText;
 import java.util.UUID;
 
 /**
- * Created by Skyz on 3/13/2018.
+ * Created by Vo Huy on 3/13/2018.
  */
 
 public class CrimeFragment extends Fragment {

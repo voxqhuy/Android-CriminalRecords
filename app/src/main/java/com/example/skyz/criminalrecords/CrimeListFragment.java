@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * Created by Skyz on 3/17/2018.
+ * Created by Vo Huy on 3/17/2018.
  */
 
 public class CrimeListFragment extends Fragment{
