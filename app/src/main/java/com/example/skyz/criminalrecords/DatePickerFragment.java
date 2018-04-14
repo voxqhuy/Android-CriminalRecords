@@ -17,6 +17,20 @@ import java.util.Date;
  */
 public class DatePickerFragment extends DialogFragment {
 
+    private static final String ARG_DATE = "date";
+
+    private DatePicker mDatePicker;
+
+    public static DatePickerFragment newInstance(Date date) {
+        
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_DATE, date);
+        
+        DatePickerFragment fragment = new DatePickerFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
