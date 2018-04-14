@@ -27,6 +27,8 @@ public class CrimeListFragment extends Fragment{
     private RecyclerView mCrimeRecyclerView;
     private CrimeAdapter mAdapter;
 
+    private int mClickPosition = -1;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -91,6 +93,8 @@ public class CrimeListFragment extends Fragment{
 
         @Override
         public void onClick(View view) {
+            // update the clicked position
+            mClickPosition = getAdapterPosition();
             // show the crime
             Intent crimeIntent = CrimeActivity.newIntent(getActivity(), mCrime.getId());
             startActivity(crimeIntent);
@@ -141,7 +145,11 @@ public class CrimeListFragment extends Fragment{
             mAdapter = new CrimeAdapter(crimes);
             mCrimeRecyclerView.setAdapter(mAdapter);
         } else {
-            mAdapter.notifyDataSetChanged();
+            if (mClickPosition > - 1) {     // notify changes at clicked crime
+                mAdapter.notifyItemChanged(mClickPosition);
+            } else {        // no crime is clicked, maybe low-memory error
+                mAdapter.notifyDataSetChanged();
+            }
         }
     }
 }
