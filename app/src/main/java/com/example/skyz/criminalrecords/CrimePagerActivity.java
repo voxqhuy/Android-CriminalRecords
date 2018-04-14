@@ -11,6 +11,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.List;
 import java.util.UUID;
@@ -57,7 +58,32 @@ public class CrimePagerActivity extends AppCompatActivity {
                 return mCrimes.size();
             }
         });
+        // go to the current index when clicked
         mViewPager.setCurrentItem(mCrimes.indexOf(crimeLab.getCrime(crimeId)));
+
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (position == 0) {
+                    mMoveToFirstBtn.setEnabled(false);
+                } else if (position == mCrimes.size() - 1) {
+                    mMoveToLastBtn.setEnabled(false);
+                } else {
+                    mMoveToFirstBtn.setEnabled(true);
+                    mMoveToLastBtn.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
         mMoveToFirstBtn.setOnClickListener((View v) -> {
                 mViewPager.setCurrentItem(0);
@@ -66,5 +92,16 @@ public class CrimePagerActivity extends AppCompatActivity {
         mMoveToLastBtn.setOnClickListener((View v) -> {
             mViewPager.setCurrentItem(mCrimes.size() - 1);
         });
+        if (mViewPager.getCurrentItem() == 0) {
+            mMoveToFirstBtn.setEnabled(false);
+        } else if (mViewPager.getCurrentItem() == mCrimes.size() - 1) {
+            mMoveToLastBtn.setEnabled(false);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
     }
 }
