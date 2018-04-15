@@ -122,13 +122,13 @@ public class CrimeFragment extends Fragment {
             // get time from Intent Extras
             Date time = (Date) data.getSerializableExtra(TimePickerFragment.EXTRA_TIME);
             // set a new time to the crime
-            mCrime.setDate(time);
+            mCrime.setTime(time);
             updateDate();
         }
     }
 
     private void updateDate() {
         mDateBtn.setText(Utils.formatDate(mCrime.getDate()));
-        mTimeBtn.setText(Utils.formatTime(mCrime.getDate()));
+        mTimeBtn.setText(Utils.formatTime(mCrime.getTime()));
     }
 }
