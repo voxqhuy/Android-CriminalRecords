@@ -9,9 +9,15 @@ import java.util.Locale;
  */
 public class Utils {
 
-    public static String formatDate (Date date){
+    public static String formatDate(Date date) {
         String datePattern = "EE, MM dd, yyyy";
         SimpleDateFormat format = new SimpleDateFormat(datePattern, Locale.US);
         return format.format(date);
+    }
+
+    public static String formatTime(Date time) {
+        String timePattern = "KK:mm aa";
+        SimpleDateFormat format = new SimpleDateFormat(timePattern, Locale.US);
+        return format.format(time);
     }
 }

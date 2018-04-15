@@ -30,7 +30,8 @@ public class CrimeFragment extends Fragment {
     private static final int REQUEST_DATE = 0;
 
     private EditText mTitleField;
-    private Button mDateButton;
+    private Button mDateBtn;
+    private Button mTimeBtn;
     private CheckBox mSolvedCheckBox;
     private Crime mCrime;
 
@@ -57,7 +58,8 @@ public class CrimeFragment extends Fragment {
 
         // View references
         mTitleField = v.findViewById(R.id.crime_title);
-        mDateButton = v.findViewById(R.id.crime_date);
+        mDateBtn = v.findViewById(R.id.crime_date);
+        mTimeBtn = v.findViewById(R.id.crime_time);
         mSolvedCheckBox = v.findViewById(R.id.crime_solved);
 
         // Title text watcher
@@ -81,8 +83,7 @@ public class CrimeFragment extends Fragment {
         mSolvedCheckBox.setChecked(mCrime.isSolved());
         // Set the date to the current date
         updateDate();
-//        mDateButton.setEnabled(false);
-        mDateButton.setOnClickListener((View view) -> {
+        mDateBtn.setOnClickListener((View view) -> {
             FragmentManager fm = getFragmentManager();
             DatePickerFragment dialog = DatePickerFragment.newInstance(mCrime.getDate());
             dialog.setTargetFragment(CrimeFragment.this, REQUEST_DATE);
@@ -111,6 +112,7 @@ public class CrimeFragment extends Fragment {
     }
 
     private void updateDate() {
-        mDateButton.setText(Utils.formatDate(mCrime.getDate()));
+        mDateBtn.setText(Utils.formatDate(mCrime.getDate()));
+        mTimeBtn.setText(Utils.formatTime(mCrime.getDate()));
     }
 }
