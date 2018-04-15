@@ -95,7 +95,7 @@ public class CrimeFragment extends Fragment {
         // Time Picker
         mTimeBtn.setOnClickListener((View view) -> {
             FragmentManager fm = getFragmentManager();
-            TimePickerFragment timePicker = TimePickerFragment.newInstance(mCrime.getDate());
+            TimePickerFragment timePicker = TimePickerFragment.newInstance(mCrime.getTime());
             timePicker.setTargetFragment(CrimeFragment.this, REQUEST_TIME);
             timePicker.show(fm, DIALOG_TIME);
         });

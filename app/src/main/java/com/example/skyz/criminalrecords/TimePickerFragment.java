@@ -40,7 +40,7 @@ public class TimePickerFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_time, null);
         // get the time from CrimeFragment
-        Date date = (Date) getArguments().getSerializable(EXTRA_TIME);
+        Date date = (Date) getArguments().getSerializable(ARG_TIME);
         Calendar calendar = Calendar.getInstance();
         // convert the time to Calendar object
         calendar.setTime(date);
