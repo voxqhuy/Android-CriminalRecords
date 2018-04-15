@@ -118,6 +118,12 @@ public class CrimeFragment extends Fragment {
             // set a new date to the crime
             mCrime.setDate(date);
             updateDate();
+        } else if (requestCode == REQUEST_TIME) {
+            // get time from Intent Extras
+            Date time = (Date) data.getSerializableExtra(TimePickerFragment.EXTRA_TIME);
+            // set a new time to the crime
+            mCrime.setDate(time);
+            updateDate();
         }
     }
 

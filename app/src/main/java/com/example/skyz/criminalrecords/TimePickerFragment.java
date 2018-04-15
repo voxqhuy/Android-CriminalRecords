@@ -20,12 +20,14 @@ import java.util.Date;
  */
 public class TimePickerFragment extends DialogFragment {
 
-    private static final String EXTRA_TIME = "com.example.skyz.criminalrecords.extra_time";
+    public static final String EXTRA_TIME = "com.example.skyz.criminalrecords.extra_time";
     private TimePicker mTimePicker;
 
     public static TimePickerFragment newInstance(Date time) {
 
         Bundle args = new Bundle();
+        // add the time to the bundle and send it to crime fragment
+        args.putSerializable(EXTRA_TIME, time);
 
         TimePickerFragment fragment = new TimePickerFragment();
         fragment.setArguments(args);
