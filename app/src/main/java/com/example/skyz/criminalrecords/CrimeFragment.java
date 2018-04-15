@@ -29,6 +29,7 @@ public class CrimeFragment extends Fragment {
     private static final String DIALOG_DATE = "DialogDate";
     private static final String DIALOG_TIME = "DialogTime";
     private static final int REQUEST_DATE = 0;
+    private static final int REQUEST_TIME = 1;
 
     private EditText mTitleField;
     private Button mDateBtn;
@@ -95,6 +96,7 @@ public class CrimeFragment extends Fragment {
         mTimeBtn.setOnClickListener((View view) -> {
             FragmentManager fm = getFragmentManager();
             TimePickerFragment timePicker = TimePickerFragment.newInstance(mCrime.getDate());
+            timePicker.setTargetFragment(CrimeFragment.this, REQUEST_TIME);
             timePicker.show(fm, DIALOG_TIME);
         });
         // Crime solved check listener
