@@ -1,6 +1,9 @@
 package com.example.skyz.criminalrecords;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -11,6 +14,7 @@ import android.widget.DatePicker;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Created by Vo Huy on 4/14/2018.
@@ -18,6 +22,7 @@ import java.util.Date;
 public class DatePickerFragment extends DialogFragment {
 
     private static final String ARG_DATE = "date";
+    public static final String EXTRA_DATE = "com.example.skyz.criminalrecords.extra_date";
 
     private DatePicker mDatePicker;
 
@@ -50,7 +55,25 @@ public class DatePickerFragment extends DialogFragment {
         return new AlertDialog.Builder(getActivity())
                 .setView(view)
                 .setTitle(R.string.date_picker_title)
-                .setPositiveButton(android.R.string.ok, null)
+                .setPositiveButton(android.R.string.ok, (DialogInterface dialogInterface,
+                                                         int i) -> {
+                        int year1 = mDatePicker.getYear();
+                        int month1 = mDatePicker.getMonth();
+                        int day1 = mDatePicker.getDayOfMonth();
+                        Date date1 = new GregorianCalendar(year1, month1, day1).getTime();
+                        sendResult(Activity.RESULT_OK, date1);
+                    }
+                )
                 .create();
+    }
+
+    private void sendResult (int resultCode, Date date) {
+        if (getTargetFragment() == null) {
+            return;
+        }
+        Intent intent = new Intent();
+        intent.putExtra(EXTRA_DATE, date);
+        getTargetFragment().onActivityResult(getTargetRequestCode(), resultCode, intent);
+
     }
 }
