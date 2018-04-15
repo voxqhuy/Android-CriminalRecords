@@ -8,10 +8,21 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import java.util.Date;
+
 /**
  * Created by Vo Huy on 4/15/2018.
  */
 public class TimePickerFragment extends DialogFragment {
+
+    public static TimePickerFragment newInstance(Date time) {
+
+        Bundle args = new Bundle();
+
+        TimePickerFragment fragment = new TimePickerFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @NonNull
     @Override

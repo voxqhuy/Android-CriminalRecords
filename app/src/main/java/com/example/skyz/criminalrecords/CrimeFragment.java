@@ -27,6 +27,7 @@ public class CrimeFragment extends Fragment {
 
     private static final String ARG_CRIME_ID = "crime_id";
     private static final String DIALOG_DATE = "DialogDate";
+    private static final String DIALOG_TIME = "DialogTime";
     private static final int REQUEST_DATE = 0;
 
     private EditText mTitleField;
@@ -83,11 +84,18 @@ public class CrimeFragment extends Fragment {
         mSolvedCheckBox.setChecked(mCrime.isSolved());
         // Set the date to the current date
         updateDate();
+        // Date Picker
         mDateBtn.setOnClickListener((View view) -> {
             FragmentManager fm = getFragmentManager();
             DatePickerFragment dialog = DatePickerFragment.newInstance(mCrime.getDate());
             dialog.setTargetFragment(CrimeFragment.this, REQUEST_DATE);
             dialog.show(fm, DIALOG_DATE);
+        });
+        // Time Picker
+        mTimeBtn.setOnClickListener((View view) -> {
+            FragmentManager fm = getFragmentManager();
+            TimePickerFragment timePicker = TimePickerFragment.newInstance(mCrime.getDate());
+            timePicker.show(fm, DIALOG_TIME);
         });
         // Crime solved check listener
         mSolvedCheckBox.setOnCheckedChangeListener((CompoundButton buttonView,
