@@ -40,7 +40,7 @@ public class DatePickerFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_date, null);
-
+        // get the updated date after closing the picker
         Date date = (Date) getArguments().getSerializable(ARG_DATE);
 
         Calendar calendar = Calendar.getInstance();

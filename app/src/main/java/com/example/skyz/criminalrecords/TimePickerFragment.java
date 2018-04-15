@@ -20,14 +20,15 @@ import java.util.Date;
  */
 public class TimePickerFragment extends DialogFragment {
 
+    private static final String ARG_TIME = "time";
     public static final String EXTRA_TIME = "com.example.skyz.criminalrecords.extra_time";
     private TimePicker mTimePicker;
 
     public static TimePickerFragment newInstance(Date time) {
 
         Bundle args = new Bundle();
-        // add the time to the bundle and send it to crime fragment
-        args.putSerializable(EXTRA_TIME, time);
+        // for CrimeFragment to send crime's time along before starting TimePickerFragment
+        args.putSerializable(ARG_TIME, time);
 
         TimePickerFragment fragment = new TimePickerFragment();
         fragment.setArguments(args);
@@ -38,22 +39,30 @@ public class TimePickerFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_time, null);
-
+        // get the time from CrimeFragment
+        Date date = (Date) getArguments().getSerializable(EXTRA_TIME);
+        Calendar calendar = Calendar.getInstance();
+        // convert the time to Calendar object
+        calendar.setTime(date);
+        // get hour, minute from Calendar object
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
 
         mTimePicker = view.findViewById(R.id.dialog_time_picker);
-
+        mTimePicker.setCurrentHour(hour);
+        mTimePicker.setCurrentMinute(minute);
 
         return new AlertDialog.Builder(getActivity())
                 .setView(view)
                 .setTitle(R.string.time_picker_title)
                 .setPositiveButton(android.R.string.ok, (DialogInterface dialogInterface,
                                                          int i) -> {
-                    int hour = mTimePicker.getCurrentHour();
-                    int minute = mTimePicker.getCurrentMinute();
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.set(Calendar.HOUR_OF_DAY, hour);
-                    calendar.set(Calendar.MINUTE, minute);
-                    Date time = calendar.getTime();
+                    int hour1 = mTimePicker.getCurrentHour();
+                    int minute1 = mTimePicker.getCurrentMinute();
+                    Calendar calendar1 = Calendar.getInstance();
+                    calendar1.set(Calendar.HOUR_OF_DAY, hour1);
+                    calendar1.set(Calendar.MINUTE, minute1);
+                    Date time = calendar1.getTime();
                     sendResult(Activity.RESULT_OK, time);
                 })
                 .create();
@@ -65,6 +74,7 @@ public class TimePickerFragment extends DialogFragment {
             return;
         }
         Intent intent = new Intent();
+        // add the time to the bundle and send it to crime fragment
         intent.putExtra(EXTRA_TIME, time);
         // CrimeFragment was set as a target of TimePickerFragment before it was called
         // getTargetFragment() returns CrimeFragment
